@@ -1,5 +1,7 @@
 
-  // Initial array of giphs
+  // ======================================================= //
+               //  Initial array of giphs
+  // ======================================================= //                
   var giphs = ["Thor", "Spider Man", "Thanos", "Iron Man"];
   // displayGiphRating function re-renders the HTML to display the appropriate content
   function displayGiphRating() {
@@ -34,7 +36,7 @@
                                         "data-animate": results[i].images.fixed_height.url,
                                         "class": "gif"});
 
-                                        var download_button = $("<button>");
+            var download_button = $("<button>");
             download_button.addClass("download_giph");
             download_button.text("Download");
 
@@ -78,7 +80,9 @@
 
   }
 
-  // Function for displaying giph data
+  // ======================================================= //
+  //            Function for displaying giph data
+  // ======================================================= // 
   function renderButtons() {
 
     // Deletes the giphs prior to adding new giphs
@@ -101,7 +105,9 @@
     }
   }
 
-  // This function handles events where the add giph button is clicked
+  // ======================================================= //
+  // Function handles events when add giph button is clicked
+  // ======================================================= //
   $("#add-giph").on("click", function(event) {
     event.preventDefault();
 
@@ -115,7 +121,9 @@
     renderButtons();
   });
 
-  // Adding click event listeners to all elements with a class of "giph"
+  // ======================================================= //
+  //                Click event listeners
+  // ======================================================= //
   $(document).on("click", ".giph", displayGiphRating);
   $(document).on("click",".download_giph", function(e) {
     e.preventDefault();
@@ -127,7 +135,11 @@
 
   // Calling the renderButtons function to display the intial buttons
   renderButtons();
-
+  // ======================================================= //
+  // **** Many Thanks to sabrina-li for the code && ****
+  //    **** ortegajohn for assitance debugging. ****
+  //     Function that handles the Download Button.
+  // ======================================================= //
   function downloadLink(url){  
     let parent =$(this).parent();
     downloadLink = parent.attr("data-move");

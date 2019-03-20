@@ -1,6 +1,6 @@
 
   // Initial array of giphs
-  var giphs = ["Joey Diaz", "Joe Rogan", "George Carlin", "Bill Hicks"];
+  var giphs = ["Thor", "Spider Man", "Thanos", "Iron Man"];
   // displayGiphRating function re-renders the HTML to display the appropriate content
   function displayGiphRating() {
 
@@ -34,11 +34,29 @@
                                         "data-animate": results[i].images.fixed_height.url,
                                         "class": "gif"});
 
+                                        var download_button = $("<button>");
+            download_button.addClass("download_giph");
+            download_button.text("Download");
+
+            var aa = results[i].images.fixed_height.url
+            var aaa =""
+
+              for (ii = 0; ii < aa.length; ii++){
+                if(aa[ii] ==="?"){
+                   break
+                }else{
+                  aaa = aaa + aa[ii];
+                }
+                
+              }
+            download_button.attr("path",aaa)
+
             let picAni = $('<img>').attr("src", results[i].images.fixed_height.url);
 
             console.log(results);
             
             giphDiv.append(pic);
+            giphDiv.append(download_button);
 
               $("#giph-container").prepend(giphDiv);
         }
@@ -101,3 +119,28 @@
 
   // Calling the renderButtons function to display the intial buttons
   renderButtons();
+
+  function downloadLink(){  
+    let parent =$(this).parent();
+    downloadLink = parent.attr("data-move");
+    console.log(downloadLink);
+    $.ajax({
+        url:downloadLink,
+        method:"GET",
+        xhrFields: {
+            responseType: 'blob'
+        }
+    }).then(function(data){
+        
+        var binaryData = [];
+        binaryData.push(data);
+        var url = window.URL.createObjectURL(new Blob(binaryData, {type: "application/gif"}))
+        //mobile support: https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL
+        var a = document.createElement('a');
+        a.href = url
+        a.download = '';
+        a.click();
+        window.URL.revokeObjectURL(url);
+    })
+}
+

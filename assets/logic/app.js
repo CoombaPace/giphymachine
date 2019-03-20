@@ -50,6 +50,7 @@
                 
               }
             download_button.attr("path",aaa)
+            console.log("This is aaa: ", aaa);
 
             let picAni = $('<img>').attr("src", results[i].images.fixed_height.url);
 
@@ -116,16 +117,23 @@
 
   // Adding click event listeners to all elements with a class of "giph"
   $(document).on("click", ".giph", displayGiphRating);
+  $(document).on("click",".download_giph", function(e) {
+    e.preventDefault();
+      console.log("Click Download: ",$(this).attr("path"))      
+         
+         downloadLink($(this).attr("path"))
+
+});
 
   // Calling the renderButtons function to display the intial buttons
   renderButtons();
 
-  function downloadLink(){  
+  function downloadLink(url){  
     let parent =$(this).parent();
     downloadLink = parent.attr("data-move");
     console.log(downloadLink);
     $.ajax({
-        url:downloadLink,
+        url:url,
         method:"GET",
         xhrFields: {
             responseType: 'blob'
